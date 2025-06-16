@@ -56,10 +56,12 @@ function GoogleMapSection({ coordinates, listing }) {
         mapContainerStyle={containerStyle}
         center={center}
         zoom={10}
-        onLoad={onLoad}
+        onLoad={map => setMap(map)}
+
         onUnmount={onUnmount}
         gestureHandling="greedy"
       >
+        { /* Child components, such as markers, info windows, etc. */}
         {listing.map((item, index) => (
           <MarkerItem
             key={index}
