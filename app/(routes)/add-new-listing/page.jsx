@@ -7,12 +7,14 @@ import React, { useState } from 'react';
 import { supabase } from '@/utils/supabase/client';
 import { toast } from 'sonner';
 import { Loader } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 function AddNewListing() {
     const [selectedAddress, setSelectedAddress] = useState();
     const [coordinates, setCoordinates] = useState();
     const { user } = useUser();
     const [loader, setLoader] = useState(false);
+    const router = useRouter();
 
     const nextHandler = async () => {
         //console.log(selectedAddress, coordinates);
@@ -32,6 +34,7 @@ function AddNewListing() {
             console.log('New data added: ', data);
             setLoader(false)
             toast("Nueva dirección agregada para el listado")
+            router.replace('/edit-listing/' + data[0].id)
         }
         if (error) {
             setLoader(false)
