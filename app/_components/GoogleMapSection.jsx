@@ -1,3 +1,4 @@
+'use client'
 import React, { useCallback, useEffect, useState } from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 import MarkerItem from './MarkerItem'
@@ -55,7 +56,7 @@ function GoogleMapSection({ coordinates, listing }) {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={10}
+        zoom={12}
         onLoad={map => setMap(map)}
 
         onUnmount={onUnmount}
