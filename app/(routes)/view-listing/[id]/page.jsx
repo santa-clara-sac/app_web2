@@ -17,7 +17,7 @@ export default async function ViewListing({ params }) {
     const listingDetail = data?.[0];
 
     return (
-        <div className='px-4 md:px-32 lg:px-56 py-5'>
+        <div className='px-4 py-5 max-w-4xl mx-auto'>
             <Slider imageList={listingDetail?.listingImages} />
             <Details listingDetail={listingDetail} />
         </div>

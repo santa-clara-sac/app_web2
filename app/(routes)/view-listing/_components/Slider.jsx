@@ -1,4 +1,4 @@
-"use client"; // ✅ Muy importante si usas hooks o props dinámicos del lado del cliente
+"use client";
 
 import React from 'react';
 import {
@@ -19,13 +19,12 @@ function Slider({ imageList }) {
         <Carousel>
           <CarouselContent>
             {imageList.map((item, index) => (
-              <CarouselItem key={item.id || index}>  {/* ✅ key agregado */}
+              <CarouselItem key={item.id || index} className="relative w-full aspect-[16/9] rounded-xl overflow-hidden">
                 <Image
                   src={item.url}
-                  width={800}
-                  height={300}
-                  alt='image'
-                  className='rounded-xl object-cover h-[360px] w-full'
+                  alt="image"
+                  fill  // ✅ Usar fill, NO width/height fijos
+                  className="object-cover"
                 />
               </CarouselItem>
             ))}
@@ -34,7 +33,7 @@ function Slider({ imageList }) {
           <CarouselNext />
         </Carousel>
       ) : (
-        <div className='w-full h-[200px] bg-slate-200 animate-pulse rounded-lg'></div>
+        <div className='w-full aspect-[16/9] bg-slate-200 animate-pulse rounded-lg'></div>
       )}
     </div>
   );

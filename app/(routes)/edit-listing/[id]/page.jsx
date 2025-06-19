@@ -33,12 +33,12 @@ import {
 } from "@/components/ui/alert-dialog"
 
 function EditListing({ params: paramsPromise }) {
-  const params = use(paramsPromise); // ✅ sin error de redeclaración
-  const { user } = useUser();
-  const router = useRouter();
-  const [listing, setListing] = useState([])
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
+    const params = use(paramsPromise); // ✅ sin error de redeclaración
+    const { user } = useUser();
+    const router = useRouter();
+    const [listing, setListing] = useState([])
+    const [images, setImages] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         console.log(user?.imageUrl)
@@ -52,15 +52,15 @@ function EditListing({ params: paramsPromise }) {
             .eq('createdBy', user?.primaryEmailAddress.emailAddress)
             .eq('id', params.id); // ✅ correcto uso
 
-            if (data) {
-                console.log(data)
-                setListing(data[0]);
-            }
-            if (data?.length <= 0) {
-                router.replace('/')
-            }
+        if (data) {
+            console.log(data)
+            setListing(data[0]);
+        }
+        if (data?.length <= 0) {
+            router.replace('/')
+        }
     }
-        
+
     const onSubmitHanler = async (formValue) => {
         setLoading(true);
         const { data, error } = await supabase
@@ -95,17 +95,17 @@ function EditListing({ params: paramsPromise }) {
 
                 const imageUrl = process.env.NEXT_PUBLIC_IMAGE_URL + fileName;
                 console.log(imageUrl);
-                
+
                 const { data, error } = await supabase
                     .from('listingImages')
                     .insert([
                         { url: imageUrl, listing_id: params?.id }
                     ])
                     .select();
-                    console.log("---");
-                    console.log(data);
-                    console.log("---");
-                    
+                console.log("---");
+                console.log(data);
+                console.log("---");
+
                 if (data) {
                     setLoading(false);
                 }
@@ -118,23 +118,22 @@ function EditListing({ params: paramsPromise }) {
         }
     }
 
-    const publishBtnHandler=async()=>{
+    const publishBtnHandler = async () => {
         setLoading(true)
         const { data, error } = await supabase
-        .from('listing')
-        .update({ active: true })
-        .eq('id', params?.id)
-        .select()
+            .from('listing')
+            .update({ active: true })
+            .eq('id', params?.id)
+            .select()
 
-        if(data)
-        {
+        if (data) {
             console.log("--------");
             console.log(params?.id);
             console.log(data);
             console.log("--------");
             setLoading(false)
             toast('Listing published!')
-        }   
+        }
     }
 
     return (
@@ -145,8 +144,8 @@ function EditListing({ params: paramsPromise }) {
                 initialValues={{
                     type: '',
                     propertyType: '',
-                    profileImage:user?.imageUrl,
-                    fullName:user?.fullName
+                    profileImage: user?.imageUrl,
+                    fullName: user?.fullName
                 }}
                 onSubmit={(values) => {
                     console.log(values);
@@ -186,7 +185,7 @@ function EditListing({ params: paramsPromise }) {
                                         defaultValue={listing?.propertyType}
                                         name="propertyType">
                                         <SelectTrigger className="w-[180px]">
-                                            <SelectValue placeholder={listing?.propertyType ? listing?.propertyType :"Seleccionar tipo de propiedad"} />
+                                            <SelectValue placeholder={listing?.propertyType ? listing?.propertyType : "Seleccionar tipo de propiedad"} />
                                         </SelectTrigger>
                                         <SelectContent>
                                             <SelectItem value="Casa unifamiliar">Casa unifamiliar</SelectItem>
@@ -199,45 +198,41 @@ function EditListing({ params: paramsPromise }) {
                             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1.5'>
                                 <div className='flex gap-2 flex-col'>
                                     <h2 className='text-gray-500'>Dormitorios</h2>
-                                    <Input type="number" placeholder="Ex.2"
-                                    defaultValue={listing?.bedroom}
-                                    name="bedroom"
+                                    <Input type="text" placeholder="Ex.2"
+                                        defaultValue={listing?.bedroom}
+                                        name="bedroom"
                                         onChange={handleChange}
                                     />
                                 </div>
                                 <div className='flex gap-2 flex-col'>
                                     <h2 className='text-gray-500'>Baños</h2>
-                                    <Input type="number" placeholder="Ex.2" defaultValue={listing?.bathroom} name="bathroom"
+                                    <Input type="text" placeholder="Ex.2" defaultValue={listing?.bathroom} name="bathroom"
                                         onChange={handleChange}
                                     />
                                 </div>
                                 <div className='flex gap-2 flex-col'>
-                                    <h2 className='text-gray-500'>Incorporado</h2>
-                                    <Input placeholder="Ex.2" onChange={handleChange} defaultValue={listing?.builtln} name="builtln" />
+                                    <h2 className='text-gray-500'>Cochera</h2>
+                                    <Input type="text" placeholder="Ex.2" onChange={handleChange} defaultValue={listing?.builtln} name="builtln" />
                                 </div>
                             </div>
                             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1.5'>
                                 <div className='flex gap-2 flex-col'>
-                                    <h2 className='text-gray-500'>Estacionamiento</h2>
-                                    <Input placeholder="Ex.2" onChange={handleChange} defaultValue={listing?.parking} name="parking" />
+                                    <h2 className='text-gray-500'>Antiguedad</h2>
+                                    <Input type="text" placeholder="Ex.2" onChange={handleChange} defaultValue={listing?.parking} name="parking" />
                                 </div>
                                 <div className='flex gap-2 flex-col'>
                                     <h2 className='text-gray-500'>Tamaño del lote (m2)</h2>
-                                    <Input type="number" placeholder="Ex.2" onChange={handleChange} defaultValue={listing?.lotSize} name="lotSize" />
+                                    <Input type="text" placeholder="Ex.2" onChange={handleChange} defaultValue={listing?.lotSize} name="lotSize" />
                                 </div>
                                 <div className='flex gap-2 flex-col'>
-                                    <h2 className='text-gray-500'>Area</h2>
-                                    <Input type="number" placeholder="Ex.2" onChange={handleChange} defaultValue={listing?.area} name="area" />
+                                    <h2 className='text-gray-500'>Número de pisos</h2>
+                                    <Input type="text" placeholder="Ex.2" onChange={handleChange} defaultValue={listing?.area} name="area" />
                                 </div>
                             </div>
                             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1.5'>
                                 <div className='flex gap-2 flex-col'>
-                                    <h2 className='text-gray-500'>Precio de venta ($)</h2>
-                                    <Input type="number" placeholder="Ex.2" onChange={handleChange} defaultValue={listing?.price} name="price" />
-                                </div>
-                                <div className='flex gap-2 flex-col'>
-                                    <h2 className='text-gray-500'>Tamaño del lote (m2)</h2>
-                                    <Input type="number" placeholder="Ex.2" onChange={handleChange} defaultValue={listing?.hoa} name="hoa" />
+                                    <h2 className='text-gray-500'>Precio de venta</h2>
+                                    <Input type="text" placeholder="Ex.2" onChange={handleChange} defaultValue={listing?.price} name="price" />
                                 </div>
                             </div>
                             <div className='grid grid-cols-1 gap-10'>
@@ -248,42 +243,42 @@ function EditListing({ params: paramsPromise }) {
                             </div>
                             <div>
                                 <h2 className='font-lg text-gray-500 my-2'>Upload Property Images</h2>
-                                    <FileUpload
-                                        setImages={(value) => setImages(value)}
-                                        imageList={listing.listingImages}
-                                    />
-                                </div>
+                                <FileUpload
+                                    setImages={(value) => setImages(value)}
+                                    imageList={listing.listingImages}
+                                />
+                            </div>
 
                             <div className='flex gap-7 justify-end'>
-                                    <Button disabled={loading} variant="outline" className="text-primary border-primary">
-                                        {loading ? <Loader className='animate-spin' /> : 'Save'}
-                                    </Button>
+                                <Button disabled={loading} variant="outline" className="text-primary border-primary">
+                                    {loading ? <Loader className='animate-spin' /> : 'Save'}
+                                </Button>
 
-                                    <AlertDialog>
-                                        <AlertDialogTrigger asChild>
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
                                         <Button type="button" disabled={loading} className="">
-                                        {loading ? <Loader className='animate-spin' /> : 'Save & Publish'}
-                                    </Button>
-                                        </AlertDialogTrigger>
-                                        <AlertDialogContent>
-                                            <AlertDialogHeader>
-                                                <AlertDialogTitle>Ready to Publish?</AlertDialogTitle>
-                                                <AlertDialogDescription>
-                                                   Do you really want to publish the listing?
-                                                </AlertDialogDescription>
-                                            </AlertDialogHeader>
-                                            <AlertDialogFooter>
-                                                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                                <AlertDialogAction onClick={async () => {
-  await onSubmitHanler(values);  // Guarda los cambios del formulario
-  await publishBtnHandler();     // Luego publica
-}}>
-  {loading ? <Loader className='animate-spin'/> : 'Continue'}
-</AlertDialogAction>
-                                            </AlertDialogFooter>
-                                        </AlertDialogContent>
-                                    </AlertDialog>
-                                </div>
+                                            {loading ? <Loader className='animate-spin' /> : 'Save & Publish'}
+                                        </Button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Ready to Publish?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                Do you really want to publish the listing?
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                            <AlertDialogAction onClick={async () => {
+                                                await onSubmitHanler(values);  // Guarda los cambios del formulario
+                                                await publishBtnHandler();     // Luego publica
+                                            }}>
+                                                {loading ? <Loader className='animate-spin' /> : 'Continue'}
+                                            </AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+                            </div>
                         </div>
                     </form>
                 )}

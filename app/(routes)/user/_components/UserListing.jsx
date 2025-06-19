@@ -36,7 +36,7 @@ function UserListing() {
             >
               {/* Estado: Published o Draft */}
               <h2 className="bg-primary rounded-lg text-white absolute top-2 left-2 px-2 text-sm py-1 z-10">
-                {item.active ? 'Published' : 'Draft'}
+                {item.active ? 'Publicado' : 'Borrador'}
               </h2>
 
               {/* Imagen */}

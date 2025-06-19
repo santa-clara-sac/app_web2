@@ -10,43 +10,28 @@ const containerStyle = {
 }
 
 function GoogleMapSection({ coordinates, listing }) {
-  const [center, setCenter] = useState({
-    lat: 40.730610,
-    lng: -73.935242
-  })
   const [map, setMap] = useState(null)
 
-  // ✅ Asegúrate de cargar la API correctamente
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY
   })
 
-  useEffect(() => {
-    if (coordinates) {
-      setCenter(coordinates)
-    }
-  }, [coordinates])
-
-  useEffect(() => {
-    if (map) {
-      map.setZoom(10)
-    }
-  }, [map])
-
   const onLoad = useCallback(function callback(mapInstance) {
     if (window.google && window.google.maps) {
-      const bounds = new window.google.maps.LatLngBounds(center)
+      const bounds = new window.google.maps.LatLngBounds(
+        { lat: -17.0, lng: -80.0 }, // suroeste (ajustado)
+        { lat: -1.5, lng: -69.0 }   // noreste (ajustado)
+      )
       mapInstance.fitBounds(bounds)
       setMap(mapInstance)
     }
-  }, [center])
+  }, [])
 
   const onUnmount = useCallback(function callback() {
     setMap(null)
   }, [])
 
-  // ✅ Esperar a que cargue
   if (!isLoaded) {
     return <div>Cargando mapa...</div>
   }
@@ -55,14 +40,10 @@ function GoogleMapSection({ coordinates, listing }) {
     <div>
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={center}
-        zoom={12}
-        onLoad={map => setMap(map)}
-
+        onLoad={onLoad}
         onUnmount={onUnmount}
         gestureHandling="greedy"
       >
-        { /* Child components, such as markers, info windows, etc. */}
         {listing.map((item, index) => (
           <MarkerItem
             key={index}

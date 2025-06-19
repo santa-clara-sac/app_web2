@@ -14,7 +14,7 @@ function FilterSection({ setBathCount, setBedCount, setParkingCount, setHomeType
     md:flex gap-2'>
             <Select onValueChange={setBedCount}>
                 <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Bed" />
+                    <SelectValue placeholder="Habitaciones" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectItem value="2">
@@ -40,7 +40,7 @@ function FilterSection({ setBathCount, setBedCount, setParkingCount, setHomeType
 
             <Select onValueChange={setBathCount}>
                 <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Bath" />
+                    <SelectValue placeholder="Baño" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectItem value="2">
@@ -64,7 +64,7 @@ function FilterSection({ setBathCount, setBedCount, setParkingCount, setHomeType
 
             <Select onValueChange={setParkingCount}>
                 <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Parking" />
+                    <SelectValue placeholder="Estacionamiento" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectItem value="1+">

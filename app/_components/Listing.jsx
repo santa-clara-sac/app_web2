@@ -1,4 +1,4 @@
-import { Bath, BedDouble, MapPin, Ruler, Search } from 'lucide-react';
+import { Bath, BedDouble, MapPin, LandPlot, Search } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import GoogleAddressSearch from './GoogleAddressSearch';
@@ -50,15 +50,17 @@ function Listing({
                 {listing?.length > 0 ? listing.map((item, index) => (
                     <Link key={item.id || index} href={'/view-listing/' + item.id}>
                         <div className='p-3 hover:border hover:border-primary rounded-lg cursor-pointer'>
-                            <Image
-                                src={item.listingImages[0].url}
-                                alt={item.title || `Listing Image ${index + 1}`}
-                                width={800}
-                                height={150}
-                                className="rounded-lg object-cover h-[150px]"
-                            />
+                            <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                                <Image
+                                    src={item.listingImages?.[0]?.url || "/placeholder.jpg"}
+                                    alt={item.title || `Listing Image ${index + 1}`}
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+
                             <div className='flex mt-2 flex-col gap-2'>
-                                <h2 className='font-bold text-xl'>${item?.price}</h2>
+                                <h2 className='font-bold text-xl'>{item?.price}</h2>
                                 <h2 className='flex gap-2 text-sm text-gray-400 '>
                                     <MapPin className='h-4 w-4' />
                                     {item.address}
@@ -76,8 +78,8 @@ function Listing({
                                     </h2>
                                     <h2 className='flex gap-2 w-full text-sm bg-slate-200 
             rounded-md p-2 text-gray-500 justify-center items-center'>
-                                        <Ruler className='h-4 w-4' />
-                                        {item?.area}
+                                        <LandPlot className='h-4 w-4' />
+                                        {item?.lotSize}
                                     </h2>
                                 </div>
                             </div>
