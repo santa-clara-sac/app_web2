@@ -4,7 +4,6 @@ import Listing from './Listing'
 import { supabase } from '@/utils/supabase/client'
 import { toast } from 'sonner';
 import GoogleMapSection from './GoogleMapSection';
-import Script from 'next/script';
 
 function ListingMapView({ type }) {
 
@@ -84,16 +83,14 @@ function ListingMapView({ type }) {
                     setCoordinates={setCoordinates}
                 />
             </div>
-            <div className='fixed right-10 h-full md:w-[900px] lg:w-[450px] xl:w-[650px]'>
+            <div className=''>
+                {/* fixed right-10 h-full md:w-[900px] lg:w-[450px] xl:w-[650px] */}
                 <GoogleMapSection
                     listing={listing}
                     coordinates={coordinates}
                 />
             </div>
-            <Script
-                src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY}&libraries=places`}
-                strategy="beforeInteractive"
-            />
+
         </div>
     )
 }

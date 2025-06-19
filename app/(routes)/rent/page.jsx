@@ -4,7 +4,7 @@ import React from 'react'
 function ForRent() {
     return (
         <div className="p-10">
-            asd
+            <ListingMapView type='Alquiler' />
         </div>
     )
 }

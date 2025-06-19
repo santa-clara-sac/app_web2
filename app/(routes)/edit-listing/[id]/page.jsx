@@ -128,6 +128,10 @@ function EditListing({ params: paramsPromise }) {
 
         if(data)
         {
+            console.log("--------");
+            console.log(params?.id);
+            console.log(data);
+            console.log("--------");
             setLoading(false)
             toast('Listing published!')
         }   
@@ -270,9 +274,12 @@ function EditListing({ params: paramsPromise }) {
                                             </AlertDialogHeader>
                                             <AlertDialogFooter>
                                                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                                <AlertDialogAction onClick={()=>publishBtnHandler()} >
-                                                    {loading?<Loader className='animate-spin'/>:'Continue'}
-                                                    </AlertDialogAction>
+                                                <AlertDialogAction onClick={async () => {
+  await onSubmitHanler(values);  // Guarda los cambios del formulario
+  await publishBtnHandler();     // Luego publica
+}}>
+  {loading ? <Loader className='animate-spin'/> : 'Continue'}
+</AlertDialogAction>
                                             </AlertDialogFooter>
                                         </AlertDialogContent>
                                     </AlertDialog>

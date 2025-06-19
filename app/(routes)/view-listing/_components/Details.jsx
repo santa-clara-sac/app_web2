@@ -22,31 +22,31 @@ function Details({ listingDetail }) {
             <div className='mt-4 flex flex-col gap-3'>
                 <h2 className=' font-bold text-2xl'>Características principales</h2>
                 <div className='grid grid-cols-2 md:grid-cols-3 gap-4 '>
-                    <h2 className='flex gap-2 items-center bg-purple-100 
+                    <h2 className='flex gap-2 items-center bg-green-100 
     rounded-lg p-3 text-primary justify-center'>
                         <Home />
                         {listingDetail?.propertyType}
                     </h2>
-                    <h2 className='flex gap-2 items-center justify-center bg-purple-100
+                    <h2 className='flex gap-2 items-center justify-center bg-green-100
      rounded-lg p-3 text-primary'>
                         <Drill />
                         Built In  {listingDetail?.builtIn}
                     </h2>
-                    <h2 className='flex gap-2 items-center justify-center bg-purple-100 rounded-lg p-3 text-primary'>
+                    <h2 className='flex gap-2 items-center justify-center bg-green-100 rounded-lg p-3 text-primary'>
                         <LandPlot />
                         {listingDetail?.area}
                     </h2>
-                    <h2 className='flex gap-2 items-center bg-purple-100 
+                    <h2 className='flex gap-2 items-center bg-green-100 
     rounded-lg p-3 text-primary justify-center'>
                         <BedDouble />
                         {listingDetail.bedroom} Habitaciones
                     </h2>
-                    <h2 className='flex gap-2 items-center justify-center bg-purple-100
+                    <h2 className='flex gap-2 items-center justify-center bg-green-100
      rounded-lg p-3 text-primary'>
                         <Bath />
                         {listingDetail.bathroom} baños
                     </h2>
-                    <h2 className='flex gap-2 items-center justify-center bg-purple-100 rounded-lg p-3 text-primary'>
+                    <h2 className='flex gap-2 items-center justify-center bg-green-100 rounded-lg p-3 text-primary'>
                         <CarFront />
                         {listingDetail.parking} Aparcamiento
                     </h2>
@@ -54,7 +54,7 @@ function Details({ listingDetail }) {
 
             </div>
             <div className='mt-4'>
-                <h2 className='font-bold text-2xl '>What's Special</h2>
+                <h2 className='font-bold text-2xl '>Descripción</h2>
                 <p className='text-gray-600 '>{listingDetail?.description}</p>
             </div>
             <div>
