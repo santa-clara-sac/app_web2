@@ -17,7 +17,7 @@ function AddNewListing() {
     const router = useRouter();
 
     const nextHandler = async () => {
-        //console.log(selectedAddress, coordinates);
+        console.log(selectedAddress, coordinates);
         setLoader(true)
         const { data, error } = await supabase
             .from('listing')
@@ -39,7 +39,7 @@ function AddNewListing() {
         if (error) {
             setLoader(false)
             console.log('error:', error);
-            toast("Server side error")
+            toast("Server side errorrr")
         }
     };
 
